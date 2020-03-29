@@ -1,3 +1,5 @@
+var instance = M.FormSelect.getInstance(elem);
+
 function initMap() {
 	// The location of Uluru
 	var uluru = {lat: 41.850, lng: -87.650};
