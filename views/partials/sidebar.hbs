@@ -1,0 +1,48 @@
+<nav class="z-depth-0 transparent">
+    <div class="nav-wrapper">
+        <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="small material-icons blue-text">menu</i></a>
+        <p class="centerhor black-text pageTitle"><strong>{{title}}</strong></p>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        </ul>
+    </div>
+</nav>
+<ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+        {{#if profile}}
+        <a href="#user"><img class="circle" src="{{profile.picture}}"></a>
+        <a href="#name"><span class="name">{{profile.display_name}}</span></a>
+        <a href="#email"><span id="email" class="email">{{profile.umd_email}}</span></a>
+        {{else}}
+        <a href="#user"><img class="circle" src="/home/css/portrait_placeholder.png"></a>
+        <a href="#name"><span class="name">John Doe</span></a>
+        <a href="#email"><span id="email" class="email">jdoe@umd.edu</span></a>
+        {{/if}}
+    </div></li>
+    <li><ul class="collapsible collapsible-accordion">
+        <li>
+            <a class="collapsible-header">Profile</a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="/home">My Profile</a></li>
+              </ul>
+            </div>
+        </li>
+    </ul></li>
+    <li><ul class="collapsible collapsible-accordion">
+        <li>
+            <a class="collapsible-header">Site Links</a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="/home">No Site Links Yet!</a></li>
+              </ul>
+            </div>
+        </li>
+    </ul></li>
+    <li><a class="collapsible-header" href='/home'>Go To Homepage</a></li>
+    <li><a class="collapsible-header" href='/landing'>About The Developer</a></li>
+    {{# if profile}}
+        <li><a class="collapsible-header" href="/home">Logout</a></li>
+    {{else}}
+        <li><a class="collapsible-header" href="/home">Login</a></li>
+    {{/if}}
+</ul>

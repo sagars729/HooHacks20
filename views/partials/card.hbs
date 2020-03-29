@@ -1,0 +1,79 @@
+{{#if small}}
+<a style="color:inherit;" {{#if card_link}} href="{{card_link}}" {{else}} href = "#" {{/if}}>
+<div ontouchstart="add_shadow(this)" ontouchend="rem_shadow(this)" onmouseenter="add_shadow(this)" onmouseleave="rem_shadow(this)" class="row card_content card_small{{#unless card_link}}modal-trigger{{/unless}}" {{#unless card_link}}href="#{{elid}}" id="{{elid}}_card"{{/unless}}>
+    {{#if right}}
+    <div class="col s2 card_img">
+        <img src={{card_img}}>
+    </div>
+    <div class="col s10" style="text-align: right">
+        <h6 class="header_text">{{position}}</h6>
+        <p class="body_text">{{company}}</p>
+        <p class="body_text">{{duration}}</p>
+        <p class="body_text">{{location}}</p>
+    </div>
+    {{else}}
+    <div class="col s10">
+        <h6 class="header_text">{{position}}</h6>
+        <p class="body_text">{{company}}</p>
+        <p class="body_text">{{duration}}</p>
+        <p class="body_text">{{location}}</p>
+    </div>
+    <div class="col s2 card_img">
+        <img src={{card_img}}>
+    </div>
+    {{/if}}
+    <p class="centerel expandPrompt">Click To Expand</p>
+</div></a>
+{{else}}
+<a style="color:inherit;" {{#if card_link}} href="{{card_link}}" {{else}} href = "#" {{/if}}>
+<div  ontouchstart="add_shadow(this)" ontouchend="rem_shadow(this)" onmouseenter="add_shadow(this)" onmouseleave="rem_shadow(this)" class="row card_content {{#unless card_link}}modal-trigger{{/unless}}" {{#unless card_link}}href="#{{elid}}"id="{{elid}}_card"{{/unless}}>
+    {{#if right}}
+    <div class="col s2 card_img">
+        <img src={{card_img}}>
+    </div>
+    <div class="col s10 flow-text" style="text-align: right">
+        <h5 class="header_text">{{position}}</h5>
+        <h6 class="body_text">{{company}}</h6>
+        <h6 class="body_text">{{duration}}</h6>
+        <h6 class="body_text">{{location}}</h6>
+    </div>
+    {{else}}
+    <div class="col s10 flow-text">
+        <h5 class="header_text">{{position}}</h5>
+        <h6 class="body_text">{{company}}</h6>
+        <h6 class="body_text">{{duration}}</h6>
+        <h6 class="body_text">{{location}}</h6>
+    </div>
+    <div class="col s2 card_img">
+        <img src={{card_img}}>
+    </div>
+    {{/if}}
+    <p class="centerel expandPrompt">Click To Expand</p>
+</div></a>
+{{/if}}
+{{#if elid}}
+<div id="{{elid}}" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s10 flow-text modal-trigger" href="#modal1">
+                <h5 class="header_text">{{position}}</h5>
+                <h6 class="body_text">{{company}}</h6>
+                <h6 class="body_text">{{duration}}</h6>
+                <h6 class="body_text">{{location}}</h6>
+            </div>
+            <div class="col s2 card_img">
+                <img src={{card_img}}>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                {{#> modal_content}}
+                {{/modal_content}}
+            </div>
+        </div>
+    </div>
+    <div class="modal-content">
+        <div class="row flow-text" style="text-align: right; margin-bottom: 0px;"><a href="#!" class="modal-close">Close</a></div>
+    </div>
+</div>
+{{/if}}

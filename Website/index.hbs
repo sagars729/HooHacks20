@@ -1,0 +1,17 @@
+{{#> layouts/base }}
+    {{#*inline "links"}}
+    <title>Showing Pixel and Tile Coordinates</title>
+    <link rel="stylesheet" type="text/css" href="/covid/css/main.css"/>
+	<meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    {{/inline}}
+
+	{{#*inline "content"}}
+    	<div id="map"></div>
+	{{/inline}}
+
+    {{#*inline "scripts"}}
+    	<script type="text/javascript" src="/covid/js/script.js"></script>
+    	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYhU5NIBPCaT-IqhUpz9wwis5wDs47IVU&callback=initMap"></script>
+	{{/inline}}
+{{/layouts/base}}

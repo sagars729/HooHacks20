@@ -1,0 +1,9 @@
+<div>
+    {{#if disableFlow}}
+    <h6 class="header_text">{{category}}</h6>
+    {{else}}
+    <h5 class="header_text">{{category}}</h5>
+    {{/if}}
+    <hr>
+    <p class="{{#unless disableFlow}}flow-text{{/unless}} body_text list_contents">{{contents}}</p>
+</div>

@@ -1,11 +1,74 @@
-/* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
-#map {
-  height: 100%;
+table{
+	table-layout: fixed;
+	width: 100%;
 }
-/* Optional: Makes the sample page fill the window. */
-html, body {
-  height: 100%;
+td,th{
+ 	width:16%;
+	padding: 1%;
+	text-align:center;
+	/*border: 1px solid black;*/
+}
+footer{
+	width: 100%;
+	background-color: #6f319b;
+	background-color: rgba(111, 49, 155,.75);
+	color: #000000;
+	max-height: 10%;
+	left:0;
+	bottom:0;
+	position:fixed
+}
+footer a{
+	color: white;
+}
+footer a:active{
+	color: black;
+}
+.centerel{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.centervert{
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    -ms-transform: translateY(-45%);
+    transform: translateY(-45%);
+}
+.centerhor{
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.centerhv {
   margin: 0;
-  padding: 0;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -ms-transform: translate(-50%, -45%);
+  transform: translate(-50%, -45%);
+}
+.pageTitle{
+    padding: 0px;
+    margin: 0px;
+}
+
+.primary-theme {
+	background-color: #c80000;
+}
+
+.secondary-theme {
+	background-color: white;
+}
+
+.primary-theme-text {
+	color: #c80000;
+}
+
+.secondary-theme-text {
+	color: white;
 }
