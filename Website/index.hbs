@@ -1,6 +1,6 @@
 {{#> layouts/base }}
     {{#*inline "links"}}
-    <title>Showing Pixel and Tile Coordinates</title>
+    <title>Covid19</title>
     <link rel="stylesheet" type="text/css" href="/covid/css/main.css"/>
 	<meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
@@ -8,15 +8,74 @@
 
 	{{#*inline "content"}}
 		<div id="conf">
-			<div class="input-field col s12">
-    			<select>
-    	  		<option value="" disabled selected>Choose Date</option>
-    	  		<option value="1">Temporary</option>
-    			</select>
-    			<label>Date To Overlay</label>
-  			</div>
+			<div class="row">
+				<div class="input-field col s10">
+    				<select id="date_picker">
+    	  			<option value="" disabled selected>Choose Date</option>
+    	  			<option value="Temporary">Temporary</option>
+    				</select>
+    				<label>Date To Overlay</label>
+  				</div>
+				<div class="col s2 center">
+					<a class="waves-effect waves-light btn" onclick="get_data()">Predict</a>
+				</div>
+			</div>
 		</div>
-    	<div id="map"></div>
+	    <div class="row map_content">
+			<div class="col s8 map_content">
+    			<div id="map"></div>
+			</div>
+			<div class="col s4">
+				<h6 id="name" class="center">Choose A State On The Map To See Data</h6>
+				<div class="row">
+					<div class="col s6">
+						<p class="center">Predicted Number of Cases</p>
+						<p class="center">Predicted Number of Ventilators</p>
+						<p class="center">Predicted Number of Beds</p>
+					</div>
+					<div class="col s6">
+						<p class="center" id="cases">Predicted Number of Cases</p>
+						<p class="center" id="vents">Predicted Number of Ventilators</p>
+						<p class="center" id="beds">Predicted Number of Beds</p>
+					</div>
+				</div>
+				<p class="center">Get Email Updates On This Location</p>
+				<div class="row">
+					<div class="input-field col s8">
+          				<input placeholder="example@gmail.com" id="s_email" type="text">
+          				<label for="email">Email</label>
+        			</div>
+					<div class="col s4 center">
+						<a class="waves-effect waves-light btn" onclick="send_email()">Subscribe</a>
+					</div>
+				</div>
+				<div class="row">
+					<h6 id="name" class="center">Predicted Statistics on the United States</h6>
+				</div>
+				<div class="row">
+					<div class="col s6">
+						<p class="center">Predicted Number of Total Cases</p>
+						<p class="center">Predicted Number of Total Ventilators</p>
+						<p class="center">Predicted Number of Total Beds</p>
+					</div>
+					<div class="col s6">
+						<p class="center" id="total_cases">Predicted Number of Total Cases</p>
+						<p class="center" id="total_vents">Predicted Number of Total Ventilators</p>
+						<p class="center" id="total_beds">Predicted Number of Total Beds</p>
+					</div>
+				</div>
+				<p class="center">Get Email Updates On The US</p>
+				<div class="row">
+					<div class="input-field col s8">
+          				<input placeholder="example@gmail.com" id="total_s_email" type="text">
+          				<label for="email">Email</label>
+        			</div>
+					<div class="col s4 center">
+						<a class="waves-effect waves-light btn" onclick="send_total_email()">Subscribe</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	{{/inline}}
 
     {{#*inline "scripts"}}

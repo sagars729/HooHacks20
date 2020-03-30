@@ -7,18 +7,17 @@ function initMap() {
     zoom: 4,
     center: kansas
   });
-  for (var name in USA) {
+	
+  return map;
+  /*for (var name in USA) {
 	markerWindow(USA[name], 1000, name, map); //1000 should be replaced with the actual prediction
-  }
+  }*/
 }
 
 function markerWindow(loc, predictedCases , name, map){
-	console.log(loc)
-	console.log(predictedCases)
-	console.log(name)
-	var cases = predictedCases
-	var ventilators = 12.26110662*(1.003104442**cases)
-	var beds = 17.3698196*(1.002964696**cases)
+	var cases = parseInt(predictedCases)
+	var ventilators = Math.floor(12.26110662*(1.003104442**cases))
+	var beds = Math.floor(17.3698196*(1.002964696**cases))
 	var	state = name
     var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
@@ -38,9 +37,117 @@ function markerWindow(loc, predictedCases , name, map){
   	var marker = new google.maps.Marker({
     	position: loc,
     	map: map,
+        label: "" + cases
  	 });
   	
 	marker.addListener('click', function() {
     	infowindow.open(map, marker);
+		document.getElementById("name").innerHTML = "" + name;
+		document.getElementById("cases").innerHTML = "" + cases;
+		document.getElementById("vents").innerHTML = "" + ventilators;
+		document.getElementById("beds").innerHTML = "" + beds;
+		
  	});
 }
+
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
+function server_email(em, date, name, cases, vents, beds){
+	d = {'email': em, 'name': name, 'cases': cases, 'vents': vents, 'beds': beds, 'date': date}
+	console.log(d)
+}
+
+function get_dates(){
+	d = {}
+	$.get({
+       url: '/covid_dates',
+       data: d,
+       success: function(data){
+       		for(x in data["past"]) add_option(data["past"][x]);
+			for(x in data["pred"]) add_option(data["pred"][x]);
+       },
+       error: function(data){
+           console.log(data)
+       }
+    });
+}
+
+function add_option(date) {
+	var op = document.createElement("option")
+	op.text = date
+	document.getElementById("date_picker").add(op)
+	$('select').formSelect();
+}
+
+function get_data(){
+	date = document.getElementById("date_picker").selectedOptions[0].value;
+	d = {'date': date}
+	$.get({
+       url: '/covid_data',
+       data: d,
+       success: function(data){
+           	map = initMap();
+			var tot = 0;
+            for(i in data["past"]){
+				markerWindow(USA[data["past"][i]["Location"]], data["past"][i]["Cases"], data["past"][i]["Location"], map);
+            	tot += parseInt(data["past"][i]["Cases"])
+			}
+			for(i in data["pred"]){
+				markerWindow(USA[data["pred"][i]["Location"]], data["pred"][i]["Cases"], data["pred"][i]["Location"], map);
+				tot += parseInt(data["pred"][i]["Cases"])
+			}
+			document.getElementById("total_cases").innerHTML = tot;
+			var ventilators = 12.26110662*(1.003104442**tot)
+			var beds = 17.3698196*(1.002964696**tot)
+			
+			document.getElementById("total_vents").innerHTML = Math.floor(ventilators)
+			document.getElementById("total_beds").innerHTML = Math.floor(beds)
+       },
+       error: function(data){
+           console.log(data)
+       }
+    });
+} 
+
+function server_email(em, date, name, cases, vents, beds){
+	d = {'email': em, 'name': name, 'cases': cases, 'vents': vents, 'beds': beds, 'date': date}
+	console.log(d)
+	$.get({
+       url: '/covid_email',
+       data: d,
+       success: function(data){
+           console.log(data)
+		   alert("Your Email Has Been Subscribed!")
+       },
+       error: function(data){
+           console.log(data)
+       }
+    });
+}
+
+function send_email(){
+	name = document.getElementById("name").innerHTML 
+	date = document.getElementById("date_picker").selectedOptions[0].value;
+	cases = document.getElementById("cases").innerHTML
+	vents = document.getElementById("vents").innerHTML
+	beds = document.getElementById("beds").innerHTML 
+	em = document.getElementById("s_email").value
+
+	server_email(em, date, name, cases, vents, beds)
+}
+
+function send_total_email(){
+	name = "US"
+	date = document.getElementById("date_picker").selectedOptions[0].value;
+	cases = document.getElementById("total_cases").innerHTML
+	vents = document.getElementById("total_vents").innerHTML
+	beds = document.getElementById("total_beds").innerHTML 
+	em = document.getElementById("s_total_email").value
+
+	server_email(em, date, name, cases, vents, beds);
+}
+
+dates = get_dates();
+console.log(dates);
