@@ -16,8 +16,8 @@ function initMap() {
 
 function markerWindow(loc, predictedCases , name, map){
 	var cases = parseInt(predictedCases)
-	var ventilators = Math.floor(12.26110662*(1.003104442**cases))
-	var beds = Math.floor(17.3698196*(1.002964696**cases))
+	var ventilators = Math.floor(.01*cases)
+	var beds = Math.floor(.05*cases)
 	var	state = name
     var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
@@ -99,8 +99,8 @@ function get_data(){
 				tot += parseInt(data["pred"][i]["Cases"])
 			}
 			document.getElementById("total_cases").innerHTML = tot;
-			var ventilators = 12.26110662*(1.003104442**tot)
-			var beds = 17.3698196*(1.002964696**tot)
+			var ventilators = Math.floor(.01*tot)
+			var beds = Math.floor(.05*tot)
 			
 			document.getElementById("total_vents").innerHTML = Math.floor(ventilators)
 			document.getElementById("total_beds").innerHTML = Math.floor(beds)
